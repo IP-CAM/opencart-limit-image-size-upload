@@ -8,7 +8,7 @@
   <file path="admin/controller/common/filemanager.php">
     <operation>
       <search>
-        <![CDATA[$content = file_get_contents($cur_file['tmp_name']);]]>
+        <![CDATA[if (!$this->user->hasPermission('modify', 'common/filemanager')) {]]>
       </search>
       <add position="before">
         <![CDATA[
