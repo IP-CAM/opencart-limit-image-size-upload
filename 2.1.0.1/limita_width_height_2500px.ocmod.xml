@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>Limita upload de imagem de 2500px</name>
+  <code>limit-upload-width-height</code>
+  <version>1.0</version>
+  <author>Lucas Leal</author>
+  <link>http://www.facebook.com/pagina404</link>
+  <file path="admin/controller/common/filemanager.php">
+    <operation>
+      <search>
+        <![CDATA[if (!in_array(utf8_strtolower(utf8_substr(strrchr($filename, '.'), 1)), $allowed)) {]]>
+      </search>
+      <add position="before">
+        <![CDATA[
+          list($width, $height, $type, $attr) = @getimagesize($cur_file['tmp_name']);
+          if ($width>2500 || $height>2500){
+            $json['error'] = "A imagem não pode ter nenhuma dimensão maior que 2500 pixels";
+          }
+        ]]>
+      </add>
+    </operation>
+  </file>
+</modification>
